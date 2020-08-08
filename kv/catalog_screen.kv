@@ -1,0 +1,33 @@
+<CatalogScreen>:
+    name: Const.CATALOG_SCREEN
+    GridLayout:
+        cols: 1
+        RV:
+            id: category_list
+
+<RV>:
+    viewclass: 'MyRecycleButton'
+    orientation: "vertical"
+    RecycleBoxLayout:
+        id: recycle_box
+        color: 0, 0.7, 0.4, 0.8
+        default_size: None, dp(56)
+        spacing: 2
+        padding:2, 2
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'vertical'
+        on_press:
+
+<MyRecycleButton@Button>:
+    background_color: [0.4,0.6,1,1]
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Line:
+            width: 1
+            rectangle: self.x, self.y, self.width, self.height
+    on_press:
+        app.main.screen_controller.recycle_button_action(self)

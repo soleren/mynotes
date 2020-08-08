@@ -1,0 +1,53 @@
+<EditCatScreen>:
+    id: edit_cat_screen
+    pos_hint:{'center_x': .5, 'center_y':.5}
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, .8
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    GridLayout:
+        size_hint: 0.7, 0.25
+        cols: 1
+        pos_hint:{'center_x': .5, 'center_y':.5}
+        spacing: 5
+        padding:5, 5
+
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        canvas:
+            Color:
+                rgba: 0.4, 0.6, 1, 1
+            Line:
+                width: 1
+                rectangle: self.x, self.y, self.width, self.height
+        MyLabel:
+            id: edit_cat_label
+            size_hint:1, 0.2
+
+        MyTextInput:
+            id: edit_cat_input
+            size_hint:1, 0.4
+
+        BoxLayout:
+            id: edit
+            size_hint:1, 0.4
+            spacing: 10
+            MyButton:
+                size_hint:0.3,1
+                text: Text.data['back']
+                on_release:
+                    app.main.category.hide_widget()
+            MyButton:
+                id: edit_cat_button
+                size_hint:0.3,1
+                text: Text.data['update_cat_name']
+                on_release:
+                    app.main.category.update_name(edit_cat_input.text) if app.main.container.ids.manager.current == 'add_category' else app.main.category.search(edit_cat_input.text)

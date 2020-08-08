@@ -1,0 +1,239 @@
+<AddCategoryScreen>:
+    name: Const.ADD_CATEGORY
+    id: add_category
+
+    GridLayout:
+        cols: 2
+        rows: 10
+        padding:[10,10,10,10]
+        spacing:[10,10]
+
+        MyTextInput:
+            id: input_cat1
+            hint_text: Text.data['category1']
+            size_hint:(0.7,1)
+
+        MyButton:
+            text: Text.data['add']
+            elevation_normal: 2
+            opposite_colors: True
+            pos_hint: {"center_x": .5}
+            size_hint:(0.3,1)
+            on_press:
+                app.main.category.create_category(1, 1,input_cat1.text)
+                input_cat1.text = ''
+
+
+        MyMainDropButton:
+            id: drop_cat1
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            size_hint:(0.7,1)
+            on_press:
+                app.main.category.refresh_category(1, 1, Const.GET_MENU)
+                app.main.screen_controller.cat_menu(1)
+
+
+        GridLayout:
+            cols: 2
+            size_hint:(0.3,1)
+            spacing: 2
+            MyButton:
+                text: Text.data['edit']
+                elevation_normal: 2
+                opposite_colors: True
+                pos_hint: {"center_x": .5}
+                on_press:
+                    app.main.category.show_widget(1, add_category)
+
+
+            MyButton:
+                text: Text.data['del']
+                elevation_normal: 2
+                opposite_colors: True
+                pos_hint: {"center_x": .5}
+                on_press:
+                    drop_cat1.text = '---'
+                    app.main.category.remove_category(1, 2, drop_cat1, Const.GET_SUBMENU)
+                    app.main.category.refresh_category(1, 1, Const.GET_MENU)
+
+        MyTextInput:
+            id: input_cat2
+            hint_text: Text.data['category2']
+            size_hint:(0.7,1)
+
+        MyButton:
+            text: Text.data['add']
+            elevation_normal: 2
+            opposite_colors: True
+            pos_hint: {"center_x": .5}
+            size_hint:(0.3,1)
+            on_press:
+                app.main.category.create_category(2, app.main.category.check_drop_cat(drop_cat1), input_cat2.text) if app.main.category.check_drop_cat(drop_cat1) else None
+                input_cat2.text = ''
+
+        MyMainDropButton:
+            id: drop_cat2
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            size_hint:(0.7,1)
+            on_press:
+                app.main.category.refresh_category(2 , app.main.category.check_drop_cat(drop_cat1), Const.GET_SUBMENU)
+                app.main.screen_controller.cat_menu(2)
+
+        GridLayout:
+            cols: 2
+            size_hint:(0.3,1)
+            spacing: 2
+            MyButton:
+                text: Text.data['edit']
+                elevation_normal: 2
+                opposite_colors: True
+                pos_hint: {"center_x": .5}
+                on_press:
+                    app.main.category.show_widget(2, add_category)
+
+            MyButton:
+                text: Text.data['del']
+                elevation_normal: 2
+                opposite_colors: True
+                pos_hint: {"center_x": .5}
+                on_press:
+                    drop_cat2.text = '---'
+                    app.main.category.remove_category(2, 3, drop_cat2, Const.GET_SUBMENU)
+
+        MyTextInput:
+            id: input_cat3
+            hint_text: Text.data['category3']
+            size_hint:(0.7,1)
+
+        MyButton:
+            text: Text.data['add']
+            elevation_normal: 2
+            opposite_colors: True
+            pos_hint: {"center_x": .5}
+            size_hint:(0.3,1)
+            on_press:
+                app.main.category.create_category(3, app.main.category.check_drop_cat(drop_cat2), input_cat3.text) if app.main.category.check_drop_cat(drop_cat2) else None
+                input_cat3.text = ''
+
+        MyMainDropButton:
+            id: drop_cat3
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            size_hint:(0.7,1)
+            on_press:
+                app.main.category.refresh_category(3, app.main.category.check_drop_cat(drop_cat2), Const.GET_SUBMENU)
+                app.main.screen_controller.cat_menu(3)
+
+        GridLayout:
+            cols: 2
+            size_hint:(0.3,1)
+            spacing: 2
+            MyButton:
+                text: Text.data['edit']
+                elevation_normal: 2
+                opposite_colors: True
+                pos_hint: {"center_x": .5}
+                on_press:
+                    app.main.category.show_widget(3, add_category)
+
+            MyButton:
+                text: Text.data['del']
+                elevation_normal: 2
+                opposite_colors: True
+                pos_hint: {"center_x": .5}
+                on_press:
+                    drop_cat3.text = '---'
+                    app.main.category.remove_category(3, 4, drop_cat3, Const.GET_SUBMENU)
+                    app.main.category.refresh_category(3, app.main.category.check_drop_cat(drop_cat2), Const.GET_SUBMENU)
+
+
+        MyTextInput:
+            id: input_cat4
+            hint_text: Text.data['category4']
+            size_hint:(0.7,1)
+
+        MyButton:
+            text: Text.data['add']
+            elevation_normal: 2
+            opposite_colors: True
+            pos_hint: {"center_x": .5}
+            size_hint:(0.3,1)
+            on_press:
+                app.main.category.create_category(4, app.main.category.check_drop_cat(drop_cat3), input_cat4.text) if app.main.category.check_drop_cat(drop_cat3) else None
+                input_cat4.text = ''
+
+        MyMainDropButton:
+            id: drop_cat4
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            size_hint:(0.7,1)
+            on_press:
+                app.main.category.refresh_category(4, app.main.category.check_drop_cat(drop_cat3), Const.GET_SUBMENU)
+                app.main.screen_controller.cat_menu(4)
+
+        GridLayout:
+            cols: 2
+            size_hint:(0.3,1)
+            spacing: 2
+
+            MyButton:
+                text: Text.data['edit']
+                elevation_normal: 2
+                opposite_colors: True
+                pos_hint: {"center_x": .5}
+                on_press:
+                    app.main.category.show_widget(4, add_category)
+
+            MyButton:
+                text: Text.data['del']
+                elevation_normal: 2
+                opposite_colors: True
+                pos_hint: {"center_x": .5}
+                on_press:
+                    drop_cat4.text = '---'
+                    app.main.category.remove_category(4, 5, drop_cat4, Const.GET_SUBMENU)
+                    app.main.category.refresh_category(4, app.main.category.check_drop_cat(drop_cat3), Const.GET_SUBMENU)
+
+        MyTextInput:
+            id: input_cat5
+            hint_text: Text.data['category5']
+            size_hint:(0.7,1)
+
+        MyButton:
+            text: Text.data['add']
+            elevation_normal: 2
+            opposite_colors: True
+            pos_hint: {"center_x": .5}
+            size_hint:(0.3,1)
+            on_press:
+                app.main.category.create_category(5, app.main.category.check_drop_cat(drop_cat4), input_cat5.text) if app.main.category.check_drop_cat(drop_cat2) else None
+                input_cat5.text = ''
+
+        MyMainDropButton:
+            id: drop_cat5
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            size_hint:(0.7,1)
+            on_press:
+                app.main.category.refresh_category(5, app.main.category.check_drop_cat(drop_cat4), Const.GET_SUBMENU)
+                app.main.screen_controller.cat_menu(5)
+
+        GridLayout:
+            cols: 2
+            size_hint:(0.3,1)
+            spacing: 2
+            MyButton:
+                text: Text.data['edit']
+                elevation_normal: 2
+                opposite_colors: True
+                pos_hint: {"center_x": .5}
+                on_press:
+                    app.main.category.show_widget(5, add_category)
+
+            MyButton:
+                text: Text.data['del']
+                elevation_normal: 2
+                opposite_colors: True
+                pos_hint: {"center_x": .5}
+                on_press:
+                    drop_cat5.text = '---'
+                    app.main.category.remove_category(5, 5, drop_cat5, Const.GET_SUBMENU)
+                    app.main.category.refresh_category(5, app.main.category.check_drop_cat(drop_cat4), Const.GET_SUBMENU)
+

@@ -1,0 +1,114 @@
+
+<SettingsScreen>:
+    name: Const.SETTINGS_SCREEN
+    GridLayout:
+        cols: 2
+        padding: 5
+        spacing: 10, 10
+
+        MyLabel:
+            size_hint: 0.6, 0.11
+            text: Text.data['image_quality']
+        MyTextInput:
+            id: image_quality
+            size_hint: 0.4, 0.11
+            text: str(Config.data['quality'])
+            halign: 'center'
+        MyLabel:
+            size_hint: 0.6, 0.11
+            text: Text.data['backup']
+        MyButton:
+            size_hint: 0.4, 0.11
+            text: Text.data['doit']
+            on_release:
+                app.main.settings.backup()
+        MyLabel:
+            size_hint: 0.6, 0.11
+            text: Text.data['server']
+        Switch:
+            id: server_switch
+            size_hint: 0.4, 0.11
+            active: Config.data['server_mode']
+            on_active:
+                app.main.settings.start_server(self)
+
+        MyLabel:
+            size_hint: 0.6, 0.11
+            text: Text.data['server_address']
+        MyTextInput:
+            id: server_address
+            disabled: True if server_switch.active else False
+            size_hint: 0.4, 0.11
+            text: str(Config.data['server_address'])
+            halign: 'center'
+
+        MyLabel:
+            size_hint: 0.6, 0.11
+            text: Text.data['server_port']
+        MyTextInput:
+            id: server_port
+            disabled: True if server_switch.active else False
+            size_hint: 0.4, 0.11
+            text: str(Config.data['server_port'])
+            halign: 'center'
+
+        RelativeLayout:
+            size_hint: 0.6, 0.11
+            MyButton:
+                disabled: True if server_switch.active else False
+                size_hint: 0.4, 1
+                pos_hint:{'center_x': .5, 'center_y':.5}
+                text: Text.data['connect']
+                on_release:
+                    app.main.settings.start_client()
+        MyLabel:
+            id: client_connection
+            size_hint: 0.4, 0.11
+            text: Text.data['status_default']
+
+        RelativeLayout:
+            size_hint: 0.6, 0.11
+            MyButton:
+                id: upload_button
+                disabled: True if server_switch.active else False
+                size_hint: 0.4, 1
+                pos_hint:{'center_x': .5, 'center_y':.5}
+                text: Text.data['upload']
+                on_release:
+                    app.main.settings.upload_db()
+        MyLabel:
+            id: client_upload
+            size_hint: 0.4, 0.11
+            text: Text.data['upload_default']
+
+        RelativeLayout:
+            size_hint: 0.6, 0.11
+            MyButton:
+                id: download_button
+                disabled: True if server_switch.active else False
+                size_hint: 0.4, 1
+                pos_hint:{'center_x': .5, 'center_y':.5}
+                text: Text.data['download']
+                on_release:
+                    app.main.settings.download_db()
+        MyLabel:
+            id: client_download
+            size_hint: 0.4, 0.11
+            text: Text.data['download_default']
+
+        Label:
+            size_hint: 0.7, 0.5
+        Label:
+            size_hint: 0.3, 0.5
+
+
+    FloatLayout:
+        orientation: 'vertical'
+        size_hint: 1, 0.15
+        padding: 5
+        MyButton:
+            size_hint: 0.3, .8
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            text: Text.data['apply']
+            on_release:
+                app.main.settings.apply_changes(image_quality.text, server_switch.active, server_address.text, server_port.text)

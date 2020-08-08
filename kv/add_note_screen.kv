@@ -1,0 +1,128 @@
+<AddNoteScreen>:
+    name: Const.ADD_NOTE
+    id: add_note_screen
+
+    BoxLayout:
+        orientation: 'vertical'
+        GridLayout:
+            cols: 5
+            rows: 2
+            padding: 5, 5, 5, 5
+            spacing: 5, 5
+            size_hint: 1, 0.15
+            MyLabel:
+                text: Text.data['category1']
+                size_hint: 1, 0.3
+            MyLabel:
+                text: Text.data['category2']
+                size_hint: 1, 0.3
+            MyLabel:
+                text: Text.data['category3']
+                size_hint: 1, 0.3
+            MyLabel:
+                text: Text.data['category4']
+                size_hint: 1, 0.3
+            MyLabel:
+                text: Text.data['category5']
+                size_hint: 1, 0.3
+
+            MyMainDropButton:
+                id: note_drop_cat1
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                size_hint: 0.8, 1
+                on_press:
+                    app.main.screen_controller.cat_menu(1)
+
+            MyMainDropButton:
+                id: note_drop_cat2
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                size_hint: 0.8, 1
+                on_press:
+                    app.main.category.refresh_category(2 , app.main.category.check_drop_cat(note_drop_cat1), Const.GET_SUBMENU_FOR_NOTES)
+                    app.main.screen_controller.cat_menu(2)
+
+            MyMainDropButton:
+                id: note_drop_cat3
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                size_hint: 0.8, 1
+                on_press:
+                    app.main.category.refresh_category(3, app.main.category.check_drop_cat(note_drop_cat2), Const.GET_SUBMENU_FOR_NOTES)
+                    app.main.screen_controller.cat_menu(3)
+
+            MyMainDropButton:
+                id: note_drop_cat4
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                size_hint: 0.8, 1
+                on_press:
+                    app.main.category.refresh_category(4, app.main.category.check_drop_cat(note_drop_cat3), Const.GET_SUBMENU_FOR_NOTES)
+                    app.main.screen_controller.cat_menu(4)
+
+            MyMainDropButton:
+                id: note_drop_cat5
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                size_hint: 0.8, 1
+                on_press:
+                    app.main.category.refresh_category(5, app.main.category.check_drop_cat(note_drop_cat4), Const.GET_SUBMENU_FOR_NOTES)
+                    app.main.screen_controller.cat_menu(5)
+
+        GridLayout:
+            rows:1
+            cols:2
+            padding: 5, 5, 5, 5
+            spacing: 5, 5
+            size_hint: 1, 0.1
+
+            TextInput:
+                id: add_note_title
+                hint_text: Text.data['note_title']
+                size_hint: 1, 1
+
+
+        ScrollView:
+            GridLayout:
+                id: add_note_body
+                cols: 2
+                padding: 5
+                spacing: 5
+                height: self.minimum_height
+                size_hint: 1, None
+                do_scroll_x: False
+                pos_hint: {'center_y':.5}
+
+
+        BoxLayout:
+            orientation: 'horizontal'
+            id: bottom_toolbar
+            size_hint: 1, 0.1
+            canvas:
+                Color:
+                    rgba: 0.4, 0.6, 1, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            MyButton:
+                id: submit_button
+                background_color: 0.1, 0.5, 1, 1
+                size_hint: 0.1, 1
+                text: Text.data['submit']
+                on_release:
+                    app.main.action_button_callback(Const.SUBMIT) if app.main.container.ids.action_bar.ids.action_label.text == Text.data['add_note'] else app.main.action_button_callback(Const.UPDATE_NOTE)
+
+            Label:
+                size_hint:0.1, 1
+
+            MyButton:
+                text: Text.data['add_text']
+                size_hint: 0.1, 1
+                on_release: app.main.action_button_callback(Const.ADD_TEXT)
+
+            MyButton:
+                text: Text.data['add_image']
+                size_hint: 0.1, 1
+                on_release: app.main.action_button_callback(Const.ADD_IMAGE)
+
+            MyButton:
+                text: Text.data['add_result']
+                size_hint:0.1, 1
+                on_release: app.main.action_button_callback(Const.ADD_RESULT)
+

@@ -1,0 +1,28 @@
+<UploadWaitingScreen>:
+    size_hint: 1, 1
+
+    Button:
+        disabled: True
+        size_hint: 1, 1
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, .9
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+
+    Label:
+        id: waiting_client_label
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        color: 0, 0, 0, 1
+        size_hint: 0.7, 0.3
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        text: Text.data['waiting']
+
+

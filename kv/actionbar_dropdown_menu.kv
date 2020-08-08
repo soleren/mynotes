@@ -1,0 +1,32 @@
+<ActionBarDropDown>:
+    id: actionbar_dropdown_menu
+    size_hint:None,None
+    size:350, 550
+
+    MyDropButton:
+        text: Text.data['category']
+        on_release: app.main.actionbar_dropdown_menu_controller.select(Const.ADD_CATEGORY)
+
+    MyDropButton:
+        text: Text.data['note']
+        on_release: app.main.actionbar_dropdown_menu_controller.select(Const.ADD_NOTE)
+
+    MyDropButton:
+        text: Text.data['main']
+        on_release: app.main.actionbar_dropdown_menu_controller.select(Const.CATALOG_SCREEN)
+
+    MyDropButton:
+        text: Text.data['settings']
+        on_release: app.main.actionbar_dropdown_menu_controller.select(Const.SETTINGS_SCREEN)
+
+<MyDropButton>:
+    background_color: [0.4,0.4,1,1]
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Line:
+            width: 1
+            rectangle: self.x, self.y, self.width, self.height
+    height: 50
+    size_hint_y: None

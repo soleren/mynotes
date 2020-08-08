@@ -1,0 +1,86 @@
+#:import NoTransition  kivy.uix.screenmanager.NoTransition
+#:import Const model.const.Const
+#:import Text model.text.Text
+#:import Config model.config.Config
+#:import Factory kivy.factory.Factory
+
+
+<Container>:
+    BoxLayout:
+        orientation: 'vertical'
+        id: main
+        canvas:
+            Color:
+                rgba: (0.4,0.6,1,1)
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        ActionBarWidget:
+            id: action_bar
+
+        ScreenManager:
+            transition: NoTransition()
+            id: manager
+            canvas:
+                Color:
+                    rgba: (1,1,1,1)
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+
+
+            CatalogScreen:
+                id: catalog_screen
+
+            NoteScreen:
+                id: note_screen
+
+            AddCategoryScreen:
+                id: add_category_screen
+
+            AddNoteScreen:
+                id: add_note_screen
+
+            SearchScreen:
+                id: search_screen
+
+            SettingsScreen:
+                id: settings_screen
+
+
+
+<MyMainDropButton@Button>:
+    text: '---'
+    background_color: [0.4,0.6,1,1]
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Line:
+            width: 2
+            rectangle: self.x, self.y, self.width, self.height
+
+
+<MyLabel@Label>
+    color: 0, 0, 0, 1
+
+
+<MyButton@Button>:
+    background_color: [0.4,0.6,1,1]
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Line:
+            width: 1
+            rectangle: self.x, self.y, self.width, self.height
+
+
+<MyTextInput@TextInput>:
+    font_size: 24
+
+
+
+

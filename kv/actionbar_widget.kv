@@ -1,0 +1,40 @@
+<ActionBarWidget>:
+    rows:1
+    cols: 4
+    size_hint_y:0.1
+    padding: 0,0,5,0
+    Button:
+        id: back_button
+        text:'<'
+        font_size: 35
+        size_hint:(0.1,1)
+        background_color: 0.4, 0.6, 1, 1
+        background_normal: ''
+        on_press:
+            app.main.screen_controller.back_button_action()
+
+    Label:
+        id: action_label
+        text: Text.data['my_notes']
+        font_size: 18
+        halign: 'center'
+
+    Button:
+        id: search_button
+        text: '@'
+        font_size: 35
+        size_hint: (0.15, 1)
+        pos_hint: {'right': 0.5, 'center_y': 0.5}
+        background_color: 0.4, 0.6, 1, 1
+        background_normal: ''
+        on_release: app.main.action_button_callback(Const.SEARCH)
+
+    Button:
+        id: root_drop_button
+        text: '...'
+        font_size: 35
+        size_hint: (0.15, 1)
+        pos_hint: {'right': 0.5, 'center_y': 0.5}
+        background_color: 0.4, 0.6, 1, 1
+        background_normal: ''
+        on_release: lambda btn: btn

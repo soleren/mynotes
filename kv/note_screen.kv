@@ -1,0 +1,41 @@
+#:import Const model.const.Const
+
+<NoteScreen>:
+    name: Const.NOTE
+    ScrollView:
+        GridLayout:
+            id: note
+            cols: 1
+            padding: 10
+            spacing: [0,10]
+            height: self.minimum_height
+            size_hint: 1, None
+            do_scroll_x: False
+            pos_hint: {'center_y':.5}
+
+
+<NoteLabel>:
+    color: 0, 0, 0, 1
+    size: self.texture_size
+    size_hint: 1, None
+    text_size: root.width, None
+
+<NoteImage>:
+    size_hint: 0.95, None
+    keep_ratio: True
+    allow_stretch: True
+    width: root.width
+    height: root.width/self.image_ratio
+
+<NoteResult>:
+    color: 0, 0, 0, 1
+    size: self.texture_size
+    size_hint: 1, None
+    text_size: root.width, None
+    padding: 10, 10
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 0.2
+        Rectangle:
+            pos: self.pos
+            size: self.size
