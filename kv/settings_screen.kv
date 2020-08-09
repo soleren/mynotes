@@ -37,6 +37,7 @@
             text: Text.data['server_address']
         MyTextInput:
             id: server_address
+
             disabled: True if server_switch.active else False
             size_hint: 0.4, 0.11
             text: str(Config.data['server_address'])
@@ -70,7 +71,7 @@
             size_hint: 0.6, 0.11
             MyButton:
                 id: upload_button
-                disabled: True if server_switch.active else False
+                disabled: True if client_connection.text == Text.data['status_yes'] else False
                 size_hint: 0.4, 1
                 pos_hint:{'center_x': .5, 'center_y':.5}
                 text: Text.data['upload']
@@ -85,7 +86,7 @@
             size_hint: 0.6, 0.11
             MyButton:
                 id: download_button
-                disabled: True if server_switch.active else False
+                disabled: True if client_connection.text == Text.data['status_yes'] else False
                 size_hint: 0.4, 1
                 pos_hint:{'center_x': .5, 'center_y':.5}
                 text: Text.data['download']

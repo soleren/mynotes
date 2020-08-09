@@ -17,28 +17,30 @@ class Server:
         self.task = None
         self.running = Config.data['server_mode']
         self.data = bytearray()
-
+        self.coro = None
 
     def check_switch_state(self, instance):
         self.running = instance.active
         if instance.active:
-            self.start_server()
+            self.loop.create_task(self.start_server())
+        else:
+            self.coro.close()
 
 
-    def start_server(self):
-        self.task = asyncio.ensure_future(asyncio.start_server(self.handle_client,
-                                                               Config.data['default_address'],
-                                                               Config.data['server_port']))
+    async def start_server(self):
+        self.coro = await asyncio.start_server(self.handle_client,
+                                               Config.data['default_address'],
+                                               Config.data['server_port'])
 
 
     async def handle_client(self, reader, writer):
-        self.data += await reader.readexactly(10)
-        size = int.from_bytes(self.data, 'big')
-        print(f"size: {size}")
-        if size > 0:
-            asyncio.ensure_future(self.client_upload(reader, writer, size))
-        else:
-            asyncio.ensure_future(self.client_download(reader, writer))
+        while self.running:
+            self.data += await reader.readexactly(10)
+            size = int.from_bytes(self.data, 'big')
+            if size > 0:
+                asyncio.ensure_future(self.client_upload(reader, writer, size))
+            else:
+                asyncio.ensure_future(self.client_download(reader, writer))
 
 
     async def client_upload(self, reader, writer, size):
@@ -71,12 +73,9 @@ class Server:
         init_file_length = (len(db_file)).to_bytes(10, byteorder='big')
         data = init_file_length
         data += db_file
-
         writer.write(data)
-        print(len(data))
         data = await reader.read(100)
         response = pickle.loads(data)
-        print(response)
 
 
 if __name__ == "__main__":
